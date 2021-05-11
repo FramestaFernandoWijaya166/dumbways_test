@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
         if(err) throw err;
         res.render('user_index', {
             title: 'CRUD Dumbways',
-            user: rows
+            books: rows
         });
     });
 });
