@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title><%= title %></title>
+  </head>
+  <body style="background-color: gainsboro;">
+    <div class="container">
+        <br>
+        <h2><%= title %> by Frado</h2>
+        <br>
+
+        <a href="/tambah-kategori" class="btn btn-primary">+ Tambah Kategori</a>
+        <a href="/tambah-buku" class="btn btn-primary">+ Tambah Buku</a>
+        <br>
+        <br>
+
+        <% categories.forEach(function(category){ %>
+          <div class="card" style="padding: 20px;">
+            <h3><%= category.name %></h3>
+            <div class="d-flex flex-row">
+            <% let pCtgry%>
+            <% categories.forEach(function(category){ %>
+              <% pCtgry = category.id %>
+            <% }); %>
+
+            <% for(let i = 0; i <= pCtgry; i++){ %>
+              <% books.forEach(function(book){ %>
+                <% if(category.id == i && book.category_id == i){ %>
+                  <div class="p-2">
+                    <div class="card" style="width: 15rem; background-color: aliceblue; float: left;">
+                      <img class="card-img-top" src="<%= book.image %>" alt="Card image cap">
+                      <div class="card-body">
+                        <h4 class="card-title"><%= book.name %></h4>
+                        <h5 class="card-text">Stok: <%= book.stok %></h5>
+                        <a href="edit-buku/<%= book.id %>" class="btn btn-primary">Pinjam</a>
+                        <a href="edit-buku/<%= book.id %>" class="btn btn-dark">Kembalikan</a>
+                        <hr>
+                        <a href="delete-buku/<%= book.id %>" class="btn btn-danger">Hapus</a>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                <% } %>
+              <% }); %>
+            <% } %>
+            </div>
+            <br>
+            <a href="delete-kategori/<%= category.id %>" class="btn btn-danger" style="width: 150px;">Hapus Kategori</a>
+          </div>
+          <br><br>
+        <% }); %>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+  <footer class=>
+    <hr>
+  </footer>
+</html>
