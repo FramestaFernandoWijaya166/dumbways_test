@@ -11,30 +11,28 @@
     <div class="container">
         <br>
         <h2><%= title %> by Frado</h2>
-        <h3>Tambah Buku</h3>
+        <h3>Tambah Content</h3>
         <br>
 
-        <form action="/save-buku" method="post">
+        <form action="/save-content/" method="post">
             <div class="form-group">
-                <label for="name">Nama:</label>
-                <input type="text" class="form-control" id="name" placeholder="Masukkan Nama" name="name" required>
+              <input type="hidden" class="form-control" id="name" name="id_course" value="<%= course %>">
             </div>
-            <select class="form-select" aria-label="Default select example" name="category_id" required>
-              <option selected>Pilih Kategori</option>
-              <% categories.forEach(function(category){ %> 
-                <option value="<%= category.id %>"><%= category.name %></option>
-              <% }); %>
+            <div class="form-group">
+              <label for="name">Nama</label>
+              <input type="text" class="form-control" id="name" placeholder="Masukkan Nama" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="name">Video Link</label>
+              <input type="text" class="form-control" id="name" placeholder="Masukkan Nama" name="video_link" required>
+            </div>
+            <select class="form-select" aria-label="Default select example" name="type" required>
+              <option selected>Pilih Type</option>
+                <option>Document</option>
+                <option>Video</option>
             </select>
             <br><br>
-            <div class="form-group">
-              <label for="name">Stok:</label>
-              <input type="text" class="form-control" id="name" placeholder="Masukkan Jumlah Stok" name="stok" required>
-            </div>
-            <div class="form-group">
-              <label for="name">Gambar:</label>
-              <input type="text" class="form-control" id="name" placeholder="Masukkan Url Gambar" name="gambar" required>
-            </div>
-            <button type="sumbit" class="btn btn-primary">+ Tambahkan</button>
+            <button type="sumbit" class="btn btn-primary">Simpan</button>
         </form>
     </div>
     

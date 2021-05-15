@@ -12,33 +12,33 @@
         <h2><%= title %> by Frado</h2>
         <br>
 
-        <a href="/tambah-kategori" class="btn btn-primary">+ Tambah Kategori</a>
-        <a href="/tambah-buku" class="btn btn-primary">+ Tambah Buku</a>
+        <a href="/tambah-author" class="btn btn-primary">Tambah Author</a>
+        <a href="/tambah-course" class="btn btn-primary">Tambah Course</a>
         <br>
         <br>
 
-        <% categories.forEach(function(category){ %>
+        <% authors.forEach(function(author){ %>
           <div class="card" style="padding: 20px;">
-            <h3><%= category.name %></h3>
+            <h4><%= author.name %></h3>
             <div class="d-flex flex-row">
-            <% let pCtgry%>
-            <% categories.forEach(function(category){ %>
-              <% pCtgry = category.id %>
+            
+            <% let pAuthor%>
+            <% authors.forEach(function(author){ %>
+              <% pAuthor = author.id; %>
             <% }); %>
 
-            <% for(let i = 0; i <= pCtgry; i++){ %>
-              <% books.forEach(function(book){ %>
-                <% if(category.id == i && book.category_id == i){ %>
+            <% for(let i = 0; i <= pAuthor; i++){ %>
+              <% course.forEach(function(course){ %>
+                <% if(author.id == i && course.id_author == i){ %>
                   <div class="p-2">
                     <div class="card" style="width: 15rem; background-color: aliceblue; float: left;">
-                      <img class="card-img-top" src="<%= book.image %>" alt="Card image cap">
+                      <img class="card-img-top" src="<%= course.thumbnail %>" alt="Card image cap">
                       <div class="card-body">
-                        <h4 class="card-title"><%= book.name %></h4>
-                        <h5 class="card-text">Stok: <%= book.stok %></h5>
-                        <a href="edit-buku/<%= book.id %>" class="btn btn-primary">Pinjam</a>
-                        <a href="edit-buku/<%= book.id %>" class="btn btn-dark">Kembalikan</a>
-                        <hr>
-                        <a href="delete-buku/<%= book.id %>" class="btn btn-danger">Hapus</a>
+                        <h4 class="card-title"><%= course.name %></h4>
+                        <h5 class="card-text">by <%= author.name %></h5>
+                        <p class="card-text">Durasi: <%= course.duration %></p>
+                        <p class="card-text"><%= course.description %></p>
+                        <a href="course/<%= course.id %>" class="btn btn-primary">Lihat</a>
                       </div>
                     </div>
                   </div>
@@ -48,7 +48,6 @@
             <% } %>
             </div>
             <br>
-            <a href="delete-kategori/<%= category.id %>" class="btn btn-danger" style="width: 150px;">Hapus Kategori</a>
           </div>
           <br><br>
         <% }); %>

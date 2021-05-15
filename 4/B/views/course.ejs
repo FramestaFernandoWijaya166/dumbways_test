@@ -7,33 +7,31 @@
     <title><%= title %></title>
   </head>
   <body style="background-color: gainsboro;">
-
     <div class="container">
         <br>
         <h2><%= title %> by Frado</h2>
-        <h3>Tambah Buku</h3>
+        <h3>Course</h3>
+        <br>
+        <a href="/tambah-content/<%= course %>" class="btn btn-primary">Tambah Content</a>
+        <br>
         <br>
 
-        <form action="/update-buku" method="post">
-            <input type="hidden" value="<%= book.id %>" name="id">
-            <div class="form-group">
-                <label for="name">Nama:</label>
-                <input type="text" class="form-control" id="name" placeholder="Masukkan Nama" value="<%= book.name %>" name="name" required>
+        <% content.forEach(function(content){ %>
+            <div class="card" style="width: 18rem; float: left;">
+                <div class="card-body">
+                  <h5 class="card-title"><%= content.name %></h5>
+                  <p class="card-text"><%= content.type %></p>
+                  <a href="<%= content.video_link %>" class="btn btn-primary">Lihat Materi</a>
+                </div>
             </div>
-            <div class="form-group">
-              <label for="name">Stok:</label>
-              <input type="text" class="form-control" id="name" placeholder="Masukkan Jumlah Stok" value="<%= book.stok %>" name="stok" required>
-            </div>
-            <div class="form-group">
-              <label for="name">Gambar:</label>
-              <input type="text" class="form-control" id="name" placeholder="Masukkan Url Gambar" value="<%= book.gambar %>" name="gambar" required>
-            </div>
-            <button type="sumbit" class="btn btn-primary">+ Tambahkan</button>
-        </form>
+        <% }); %>
+        
     </div>
-    
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   </body>
+  <footer class=>
+    <hr>
+  </footer>
 </html>

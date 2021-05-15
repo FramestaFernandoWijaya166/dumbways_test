@@ -9,7 +9,7 @@ const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'crud_dumbways'
+    database: 'web_course'
   });
   
 connection.connect((err) => {
@@ -24,92 +24,88 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
 
 app.get('/', (req, res) => {
-    let sqlC = "SELECT * FROM categories";
-    let sqlB = "SELECT * FROM books";
-    let query = connection.query(sqlC, (err, rowsC) => {
+    let sqlAut = "SELECT * FROM author";
+    let sqlCou = "SELECT * FROM course";
+    let sqlCon = "SELECT * FROM content";
+    let query = connection.query(sqlAut, (err, rowsAut) => {
         if(err) throw err;
-        let query = connection.query(sqlB, (err, rowsB) => {
+        let query = connection.query(sqlCou, (err, rowsCou) => {
             if(err) throw err;
-            res.render('index', {
-                title: 'CRUD Dumbways',
-                categories: rowsC,
-                books: rowsB
+            let query = connection.query(sqlCon, (err, rowsCon) => {
+                if(err) throw err;
+                res.render('index', {
+                    title: 'Dumb-Course',
+                    authors: rowsAut,
+                    course: rowsCou,
+                    content: rowsCon
+                });
             });
         });
     });
 });
 
-app.get('/tambah-kategori', (req, res) => {
-    res.render('tambah-kategori', {
-        title: 'CRUD Dumbways'
+app.get('/tambah-author', (req, res) => {
+    res.render('tambah-author', {
+        title: 'Dumb-Course'
     });
 });
 
-app.get('/tambah-buku', (req, res) => {
-    let sqlC = "SELECT * FROM categories";
-    let query = connection.query(sqlC, (err, rowsC) => {
+app.get('/tambah-course', (req, res) => {
+    let sqlA = "SELECT * FROM author";
+    let query = connection.query(sqlA, (err, rowsA) => {
         if(err) throw err;
-        res.render('tambah-buku', {
-            title: 'CRUD Dumbways',
-            categories: rowsC
+        res.render('tambah-course', {
+            title: 'Dumb-Course',
+            author: rowsA
         });
     });
 });
 
-app.post('/save-kategori', (req, res) => {
+app.get('/tambah-content/:courseId', (req, res) => {
+    const courseId = req.params.courseId;
+    res.render('tambah-content', {
+        title: 'Dumb-Course',
+        course: courseId,
+    });
+});
+
+app.post('/save-author', (req, res) => {
     let data = {name: req.body.name,}
-    let sql = "INSERT INTO categories SET ?";
+    let sql = "INSERT INTO author SET ?";
     let query = connection.query(sql, data, (err, result) => {
         if(err) throw err;
         res.redirect('/');
     });
 });
 
-app.post('/save-buku', (req, res) => {
-    let data = {name: req.body.name, category_id: req.body.category_id, stok: req.body.stok, image: req.body.gambar}
-    let sql = "INSERT INTO books SET ?";
+app.post('/save-course', (req, res) => {
+    let data = {name: req.body.name, thumbnail: req.body.thumbnail, id_author: req.body.id_author, duration: req.body.duration, description: req.body.description}
+    let sql = "INSERT INTO course SET ?";
     let query = connection.query(sql, data, (err, result) => {
         if(err) throw err;
         res.redirect('/');
     });
 });
 
-app.get('/edit-buku/:bookId', (req, res) => {
-    const bookId = req.params.bookId;
-    let sql = `SELECT * FROM books WHERE id = ${bookId}`;
+app.post('/save-content', (req, res) => {
+    let data = {name: req.body.name, video_link: req.body.video_link, type: req.body.type, id_course: req.body.id_course}
+    let sql = "INSERT INTO content SET ?";
+    let query = connection.query(sql, data, (err, result) => {
+        if(err) throw err;
+        res.redirect('/');
+    });
+});
+
+app.get('/course/:courseId', (req, res) => {
+    const courseId = req.params.courseId;
+    let sql = `SELECT * FROM content WHERE id_course = ${courseId}`;
     let query = connection.query(sql, (err, result) => {
         if(err) throw err;
-        res.render('edit-buku', {
-            title: 'CRUD Dumbways',
-            book: result[0]
+        res.render('course', {
+            title: 'Dumb-Course',
+            course: courseId,
+            content: result
         });
-    }); 
-});
-
-app.post('/update-buku', (req, res) => {
-    const bookId = req.body.id;
-    let sql = "UPDATE books SET name='" +req.body.name+ "', stok='" +req.body.stok+ "', image='" +req.body.gambar+"' WHERE id = " +bookId;
-    let query = connection.query(sql, (err, result) => {
-        if(err) throw err;
-        res.redirect('/');
-    });
-});
-
-app.get('/delete-buku/:bookId', (req, res) => {
-    const bookId = req.params.bookId;
-    let sql = `DELETE FROM books WHERE id = ${bookId}`;
-    let query = connection.query(sql, (err, result) => {
-        if(err) throw err;
-        res.redirect('/');
-    }); 
-});
-
-app.get('/delete-kategori/:categoryId', (req, res) => {
-    const categoryId = req.params.categoryId;
-    let sql = `DELETE FROM categories WHERE id = ${categoryId}`;
-    let query = connection.query(sql, (err, result) => {
-        if(err) throw err;
-        res.redirect('/');
     }); 
 });
 
