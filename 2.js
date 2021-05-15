@@ -3,18 +3,33 @@ let arr = ['u', 'W', 'd', 'o', 'b', 'd', 'D', 's', 'y', 'a', 'i', 'm', 't']
 //jadi yang a i m t saya mengarang. Dan saya sudah kehabisan waktu juga
 
 //maaf saya juga kurang paham perintahnya untuk menyusun dengan bubble sort mejadi 'DumbWaysdotid'
-//karena bubble sort mengurutkan nilainya dari yang terbesar sampai yang terkecil, jadi saya kurang paham
+//karena bubble sort mengurutkan nilainya dari yang terbesar sampai yang terkecil, atau sebaliknya.
+//saya kurang paham jika harus menjadi 'DumbWaysdotid', jadi saya sort biasa saja
 
+console.log("Sebelum:")
 console.log(arr)
 
-for (var i=1; i<arr.length; i++){
-    for (var j=arr.length; j<1; j--){
-        if (parseInt(arr[i-1]) < parseInt(arr[i])){
-            var temp = arr[i-1]
-            arr[i-1] = arr[i]
-            arr[i] = temp
-        }   
-    }    
+function bubble_Sort(a)
+{
+    var swapp
+    var n = a.length-1
+    var x=a
+    do {
+        swapp = false
+        for (var i=0; i < n; i++)
+        {
+            if (x[i] > x[i+1])
+            {
+               var temp = x[i]
+               x[i] = x[i+1]
+               x[i+1] = temp
+               swapp = true
+            }
+        }
+        n--
+    } while (swapp)
+ return x
 }
 
-console.log(arr)
+console.log("Sesudah:")
+console.log(bubble_Sort(arr));
