@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-//90% hasil mikir sendiri
+//98% hasil mikir sendiri
 
 char arr[15] = {'D', 'U', 'M', 'B', 'W', 'A', 'Y', 'S', 'I', 'D', 'U', 'J', 'I', 'A', 'N'};
 int urut = -1;
