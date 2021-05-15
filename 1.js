@@ -21,6 +21,7 @@ function cekEmail(email){
     }
 }
 
+//Yang passordnya gagal hehe
 function cekPassword(password){
     let pwd = password.length;
     if(pwd >= 8){
