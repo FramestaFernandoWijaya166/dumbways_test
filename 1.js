@@ -3,8 +3,8 @@ cekEmail('kamusiapa@gmail.com');
 cekPassword('Kamusiapa2169');
 
 function cekUsername(username){
-    let LC = username.toLowerCase()
-    if(username === LC){
+    let lc = username.toLowerCase()
+    if(username === lc){
         console.log('Username Valid')
     }else{
         console.log('Username Invalid')
